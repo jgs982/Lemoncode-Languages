@@ -5,37 +5,54 @@ console.log("************** PRACTICE *********************");
     Biggest Word
     
     Crea una función que reciba una frase en formato string y devuelva la palabra más larga. En caso de haber varias con longitud máxima que devuelva siempre la primera. Ten en cuenta que consideramos una palabra a aquello que esté separado por espacios.
-    
-    **TIP**: Consulta la documentación en MDN sobre los strings, verás que incorporan muchas funciones de utilidad para el manejo y manipulación de strings.
-    
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype
-    
-    function biggestWord(phrase) {
-      // Implementation here
-    }
-    
-    // Ejemplo
-    console.log(biggestWord("Esta frase puede contener muchas palabras"));  // "contener"
-    console.log(biggestWord("Ejercicios básicos de JavaScript"));           // "Ejercicios"
 */
 
+function biggestWord(phrase) {
+  let resultado = ""
+  let palabras = phrase.split(" ");
+
+  palabras.forEach(function(palabra){
+    if(palabra.length > resultado.length) {
+       resultado = palabra
+    }
+  });
+  
+  return resultado; 
+}
+
+console.log(biggestWord("Esta frase puede contener muchas palabras"));  
+console.log(biggestWord("Ejercicios básicos de JavaScript"));           
+
+
 /*
-    Califications
+    Values    
+    Escribe una función que devuelva una lista de valores de todas las propiedades de un objeto    
+*/
+
+function values(obj) {
+  let valores = [];
+
+  for(const key in obj) 
+  {
+    valores.push(objeto[key]);         
+  }
+
+  return valores;
+}
+
+const objeto = {
+  id: 31,
+  duration: 310,
+  name: "long video",
+  format: "mp4"
+};
+
+console.log(values(objeto));
+
+/*
+    Califications    
     
-    > **NOTA IMPORTANTE**: Realiza primero el ejercicio "Values".
-    
-    Dada la calificación de alumnos de una clase en forma de objeto como el siguiente:
-    
-    const eso2o = {
-      David: 8.25,
-      Maria: 9.5,
-      Jose: 6.75,
-      Juan: 5.5,
-      Blanca: 7.75,
-      Carmen: 8,
-    };    
-    
-    Implementa una función que muestre la media de la clase de forma textual, es decir, siguiendo el sistema de calificación español:
+    Dada la calificación de alumnos de una clase en forma de objeto, implementa una función que muestre la media de la clase de forma textual, es decir, siguiendo el sistema de calificación español:
     
     - Matrícula de Honor = 10
     - Sobresaliente = entre 9 y 10
@@ -43,67 +60,52 @@ console.log("************** PRACTICE *********************");
     - Bien = entre 6 y 7
     - Suficiente = entre 5 y 6
     - Insuficiente = entre 4 y 5
-    - Muy deficiente = por debajo de 4
-    
-    function printAverage(classResults) {
-      // Implementation here.
-    }
-        
-    **TIP**: Rompe en tantas funciones auxiliares como necesites.
-    
-    **TIP**: Utiliza el ejercicio "values" para extraer los valores de un objeto. En `Array.prototype` también cuentas con otro método que podría resultarte útil para transformar un array a un único valor.
+    - Muy deficiente = por debajo de 4    
 */
 
-/* 
-    Check Arguments
+function printAverage(classResults) {
+  let num_notas = 0;
+  let notas = 0;
+  let calificacion = 0;
+  let nota_letra = '';
 
-    Es muy habitual en javascript, al recibir argumentos de una función, querer asegurarnos de que no sean `undefined` o `null`. En este ejercicio debes convertir el código de abajo en algo equivalente pero más compacto y expresivo.
-    
-    **TIP**: Piensa en el operador ternario y también en el operador OR.
-    
-    **TIP**: Puedes suponer que input es siempre de tipo string, incluyendo `null` o `undefined`. Es decir, no vas a recibir números, objetos, etc.
-    
-    function f(input) {
-      var result;
-      if (input === undefined) {
-        result = "Unknown";
-      } else if (input === null) {
-        result = "";
-      } else {
-        result = input;
-      }
-      return result;
-    }    
-*/
+  for(const key in classResults) 
+  {
+    num_notas += 1;
+    notas += classResults[key];         
+  }
 
-/* 
-    Clone Merge
-    
-    Apartado A
-    
-    Implementa una función `clone` que devuelva un objeto clonado a partir de otro:
-        
-    function clone(source) {
-      // Implementation here.
-    }
-        
-    Apartado B
-    
-    Dados dos objetos cualesquiera, implementa una función `merge` que mezcle uno sobre otro. El objeto resultante debe ser la mezcla de las propiedades del objeto `source` sobre las del objeto `target`.
-    
-    **TIP**: Usa la función `clone` del apartado A.
-        
-    function merge(source, target) {
-      // Implementation here.
-    }
-    
-    // Por ejemplo, dados estos 2 objetos:
-    var a = { name: "Maria", surname: "Ibañez", country: "SPA" };
-    var b = { name: "Luisa", age: 31, married: true };
-    
-    // El resultado de mezclar a sobre b sería:
-    merge(a, b); // {name: "Maria", age: 31, married: true, surname: "Ibañez", country: "SPA"}    
-*/
+  calificacion = notas/num_notas;
+
+  if(calificacion===10){
+    nota_letra = 'Matrícula de Honor';
+  } else if(calificacion>=9 && calificacion<10) {
+    nota_letra = 'Sobresaliente';
+  } else if(calificacion>=7 && calificacion<9) {
+    nota_letra = 'Notable';
+  } else if(calificacion>=6 && calificacion<7) {
+    nota_letra = 'Bien';
+  } else if(calificacion>=5 && calificacion<6) {
+    nota_letra = 'Suficiente';
+  } else if(calificacion>=4 && calificacion<5) {
+    nota_letra = 'Insuficiente';
+  } else {
+    nota_letra = 'Muy Deficiente';
+  }
+  
+  console.log(nota_letra);
+}
+
+const eso2 = {
+  David: 8.25,
+  Maria: 9.5,
+  Jose: 6.75,
+  Juan: 5.5,
+  Blanca: 7.75,
+  Carmen: 8,
+};    
+
+printAverage(eso2);
 
 /*
     Deep Equal
@@ -165,64 +167,7 @@ console.log("************** PRACTICE *********************");
       - Si saca doble 6, ¡dale un premio!
 */
 
-/*
-    Hoisting
-    
-    **NOTA**: Realiza estos ejercicios en vanilla JS. Si estás utilizando un playground de TypeScript obtendrás errores.
-    
-    Apartado A
-    
-    ¿Cual crees que será el resultado de la consola y porqué?
-    
-    **TIP**: escribe el código equivalente.
-        
-    function f() {
-      console.log(a);
-      console.log(g());
-    
-      var a = "good job!";
-      function g() {
-        return a;
-      }
-      console.log(a);
-    }
-    
-    f();
-        
-    Apartado B
-    
-    ¿Y ahora?
-        
-    var a = 1;
-    
-    (function() {
-      console.log(a);
-      var a = 2;
-      b = 4;
-      var c = 3;
-    })();
-    
-    console.log(a);
-    console.log(b);
-    console.log(c);
-        
-    ## Apartado C
-    
-    ¿Y con esta ligera variación?
-    
-    f();
-    var a = 1;
-    
-    function f() {
-      console.log(a);
-      b = 4;
-      var c = 3;
-    }
-    
-    console.log(a);
-    console.log(b);
-    console.log(c);    
-*/
+
 
 /*
     Includes
@@ -281,30 +226,7 @@ console.log("************** PRACTICE *********************");
     ofrece JavaScript mediante el interfaz `Math`: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
 */
 
-/*
-    Read Book
-    
-    Crea una función `isBookRead` que reciba una lista de libros y un título y devuelva si se ha leído o no el libro.
-    Un libro es un objeto con `title` como string y `isRead` como booleano. En caso de no existir el libro devolver false
-    
-    **TIP**: Existe un método de los Arrays que te ayudará a buscar según un patrón:
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype
-        
-    function isBookRead(books, titleToSearch) {
-      // Implementation here
-    }
-    
-    // Ejemplo:
-    var books = [
-      { title: "Harry Potter y la piedra filosofal", isRead: true },
-      { title: "Canción de hielo y fuego", isRead: false },
-      { title: "Devastación", isRead: true },
-    ];
-    
-    console.log(isBookRead(books, "Devastación")); // true
-    console.log(isBookRead(books, "Canción de hielo y fuego")); // false
-    console.log(isBookRead(books, "Los Pilares de la Tierra")); // false    
-*/
+
 
 /*
     Reverse Text
@@ -344,59 +266,6 @@ console.log("************** PRACTICE *********************");
 */
 
 /*
-    This
-    
-    ¿Cual es la salida de los logs en el siguiente código? Intenta razonar, no te limites a ejecutar la solución.
-        
-    var surname = "Pérez";
-    var person = {
-      name: "Juan",
-      surname: "González",
-      wife: {
-        name: "Ana",
-        surname: "Jiménez",
-        getSurname: function() {
-          return this.surname;
-        },
-      },
-    };
-    
-    console.log(person.wife.getSurname());
-    var surnameFunction = person.wife.getSurname;
-    console.log(surnameFunction());
-    console.log(surnameFunction.call(person));    
-*/
-
-/*
-    Values
-    
-    Escribe una función que devuelva una lista de valores de todas las propiedades de un objeto:
-        
-    function values(obj) {
-      // Implementation here
-    }
-    
-    // Ejemplo:
-    console.log(values({ id: 31, duration: 310, name: "long video", format: "mp4" })); // [31, 310, "long video", "mp4"]
-        
-    Challenge
-    
-    Evita añadir las propiedades heredadas en caso de ser instancia de una clase:
-        
-    // Ejemplo:
-    function Person(name) {
-      this.name = name;
-    }
-    
-    Person.prototype.walk = function() {
-      console.log("I'm walking");
-    };
-    
-    var john = new Person("John");
-    console.log(values(john)); // ["John"]; en vez de ["John"; function() { console.log("I'm walking"); }]    
-*/
-
-/*
     Zip
     
     Crea una función `zipObject` tal que acepte un array de claves como primer argumento y un array de valores como segundo argumento y cuyo objetivo sea crear un objeto uniendo las claves con sus valores.
@@ -431,124 +300,6 @@ console.log("************** PRACTICE *********************");
     function decrypt(secret) {
       // Implementation here.
     }    
-*/
-
-/*
-    Args
-    
-    Dada la siguiente función:
-        
-    function f(a, { b } = {}, c = 100) {
-      console.log(arguments.length);
-      console.log(a, a === arguments[0]);
-      console.log(b, b === arguments[1]);
-      console.log(c, c === arguments[2]);
-    }
-        
-    ## Apartado A
-    
-    ¿Qué muestra por consola esta llamada?
-        
-    f("JS rocks!", { b: "b" });
-        
-    ## Apartado B
-    
-    ¿Y con estos argumentos?
-    
-    f({ b: "b" });
-        
-    Apartado C
-    
-    ¿Y ahora?
-    
-    f("JS sucks!", null, 13);    
-*/
-
-/*
-    Array Operations
-    
-    Apartado A
-    
-    Implementa una función `head` (inmutable), tal que, dado un array como entrada extraiga y devuelva su primer elemento. Utiliza destructuring.
-    
-    const head = (// array //) => {}; // Implementation here.
-        
-    Apartado B
-    
-    Implementa una función `tail` (inmutable), tal que, dado un array como entrada devuelta todos menos el primer elemento. Utiliza rest operator.
-    
-    const tail = (// array //) => {}; // Implementation here.
-        
-    Apartado C
-    
-    Implementa una función `init` (inmutable), tal que, dado un array como entrada devuelva todos los elementos menos el último. Utiliza los métodos que ofrece `Array.prototype`.
-    
-    const init = (// array //) => {}; // Implementation here.
-        
-    Apartado D
-    
-    Implementa una función `last` (inmutable), tal que, dado un array como entrada devuelva el último elemento.
-    
-    const last = (// array //) => {}; // Implementation here.    
-*/
-
-/*
-    Concat
-
-    Apartado A
-    
-    Implementa una función `concat`, tal que, dados 2 arrays como entrada, devuelva la concatenación de ambos. Utiliza rest / spread.
-    
-    **TIP**: Se hace en 1 línea. No utilices el método `Array.prototype.concat()`.
-        
-    const concat = (a, b) => {}; // Implementation here.
-        
-    Apartado B
-    
-    Repite el ejercicio anterior suponiendo cualesquiera arrays de entrada (no te limites solamente a 2).
-        
-    const concatMulti = (// multiples arrays //) => {}; // Implementation here.    
-*/
-
-/*
-    Console
-    
-    Apartado A
-    
-    Intenta razonar cual será el resultado de la consola al ejecutar este código:
-    
-    var a = 1;
-    let b = 2;
-    
-    {
-      try {
-        console.log(a, b);
-      } catch (error) {}
-      let b = 3;
-      console.log(a, b);
-    }
-    
-    console.log(a, b);
-    
-    () => {
-      console.log(a);
-      var a = 5;
-      let b = 6;
-      console.log(a, b);
-    };
-    
-    console.log(a, b);
-        
-    Apartado B
-    
-    Sin tocar ninguno de los `console.log` anteriores, modifica ligeramente el código para que muestre la siguiente secuencia:
-    
-    1 3
-    1 3
-    1 2
-    5
-    5 6
-    1 2    
 */
 
 /*
@@ -611,43 +362,6 @@ console.log("************** PRACTICE *********************");
     Comprueba la salida por consola ... algo no funciona como esperábamos ¿verdad? ¿Sabrías decirnos que está pasando aquí? ¿Cómo lo arreglarías?
 */
 
-/*
-    Slot Machine
-
-    El objetivo de este ejercicio es crear una máquina tragaperras utilizando clases donde cada vez que juguemos insertemos una moneda.
-    
-    Cada máquina tragaperras (instancia) tendrá un contador de monedas que automáticamente se irá incrementando conforme vayamos jugando. Cuando se llame al método play el número de monedas debe incrementar de forma automática y debe generar tres booleanos aleatorios. En caso de que los tres booleanos sean true debe un mensaje por consola:
-    
-    Congratulations!!!. You won <número de monedas> coins!!
-        
-    y reiniciar las monedas almacenadas, ya que las hemos conseguido y han salido de la máquina. En caso contrario deberá mostrar otro mensaje:
-    
-    Good luck next time!!    
-    
-    // Ejemplo de uso:
-    class SlothMachine {
-      
-    }
-    
-    const machine1 = new SlothMachine();
-    machine1.play(); // "Good luck next time!!"
-    machine1.play(); // "Good luck next time!!"
-    machine1.play(); // "Congratulations!!!. You won 3 coins!!"
-    machine1.play(); // "Good luck next time!!"
-    machine1.play(); // "Congratulations!!!. You won 2 coins!!"    
-*/
-
-/*
-    Swap
-    
-    ¿Sabrías intercambiar el valor de estas 2 variables en una sola línea?
-        
-    let a = "A";
-    let b = "B";
-    
-    // Implementation here, one line, one shot!    
-    console.log(a === "B" && b === "A" ? "You did it!" : "Keep trying!");    
-*/
 
 /*
     Califications Summary
