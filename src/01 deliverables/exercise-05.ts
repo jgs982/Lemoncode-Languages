@@ -1,7 +1,7 @@
 console.log("************** DELIVERABLE 05 *********************");
 
 /*
-    ### 5. Slot Machine
+    5. Slot Machine
     
     El objetivo de este ejercicio es crear una máquina tragaperras utilizando clases donde cada vez que juguemos insertemos una moneda. Cada máquina tragaperras (instancia) tendrá un **contador de monedas** que automáticamente se irá incrementando conforme vayamos jugando.
     
@@ -13,17 +13,35 @@ console.log("************** DELIVERABLE 05 *********************");
     En caso contrario deberá mostrar otro mensaje:
     
     "Good luck next time!!".
-        
-    #### Ejemplo de uso
-    
-    class SlothMachine {
-      
-    }
-    
-    const machine1 = new SlothMachine();
-    machine1.play(); // "Good luck next time!!"
-    machine1.play(); // "Good luck next time!!"
-    machine1.play(); // "Congratulations!!!. You won 3 coins!!"
-    machine1.play(); // "Good luck next time!!"
-    machine1.play(); // "Congratulations!!!. You won 2 coins!!"    
 */
+
+class SlotMachine {
+    private num_monedas = 0;
+    private ruleta1;
+    private ruleta2;
+    private ruleta3;
+    
+    play () {
+        this.num_monedas += 1;
+        this.ruleta1 = Math.random() < 0.5;
+        this.ruleta2 = Math.random() < 0.5;
+        this.ruleta3 = Math.random() < 0.5;
+
+        if(this.ruleta1 && this.ruleta2 && this.ruleta3) 
+        {            
+            console.log(`Congratulations!!!. You won ${this.num_monedas} coins!!`);
+            this.num_monedas = 0;
+        }
+        else 
+        {
+            console.log('Good luck next time!!');   
+        }
+    }
+}
+
+const machine1 = new SlotMachine();
+machine1.play(); 
+machine1.play(); 
+machine1.play(); 
+machine1.play(); 
+machine1.play(); 
